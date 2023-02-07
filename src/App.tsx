@@ -5,7 +5,14 @@ import Header from './components/header';
 import CharacterContainer from './components/character_container';
 import Navigation from './components/navigation';
 import { DisneyCharacter } from './disney_character';
-export const FavouritesContext = React.createContext<number[]>([]);
+
+const context = {
+  values: [] as number[],
+  set: (favourites: number[]) => {}
+  }
+
+export const FavouritesContext = React.createContext(context);
+
 
 const App: React.FC = () => {
 
@@ -26,14 +33,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <FavouritesContext.Provider value={characterFavourites}>
+    <FavouritesContext.Provider value={context}>
       <div className="page">
         <Header currentPage={currentPage} />
         <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        <CharacterContainer characters={characters}
-          updateFavourites={setCharacterFavourites} />
+        <CharacterContainer characters={characters} />
       </div>
     </FavouritesContext.Provider>
+    
   );
 }
 
